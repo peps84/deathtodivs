@@ -15,14 +15,28 @@ module.exports = function(grunt) {
       tasks: ['jshint']
     },
     browserSync: {
-        bsFiles: {
-            src : 'src/css/*.css'
-        },
-        options: {
-            server: {
-                baseDir: "src"
-            }
+      bsFiles: {
+          src : 'src/css/*.css'
+      },
+      options: {
+        server: {
+            baseDir: "src"
         }
+      }
+    },
+    compass: {                  
+      dist: {                  
+        options: {              
+          environment: 'production',
+          outputStyle: 'compressed'
+        }
+      },
+      dev: {
+        options: {
+          environment: 'development',
+          outputStyle: 'expanded'
+        }
+      }
     }
   });
 
@@ -30,7 +44,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('ngrok');
   grunt.loadNpmTasks('grunt-browser-sync');
-  
-  grunt.registerTask('default', ['jshint']);
+  grunt.loadNpmTasks('grunt-contrib-compass');
+
+  grunt.registerTask('default', ['jshint','compass:dev']);
 
 };
