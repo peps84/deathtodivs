@@ -3,4 +3,19 @@
 body {
   font: 100% Helvetica, sans-serif;
   background-color: #efefef;
+  #ball{
+
+  }
+  #cyclinder1{
+  	animation-duration: 10s;
+		animation-name:sink;
+  }
+  @keyframes sink{
+  	from{
+  		-webkit-transform: rotateY(0deg) translateZ(100px); 
+  	}
+  	to{
+			-webkit-transform: rotateY(180deg) translateZ(-3000px); 
+  	}
+  }
 }
