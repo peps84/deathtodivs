@@ -45,6 +45,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-browser-sync');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-ngrok');
-  grunt.registerTask('default', ['jshint','compass:dev','browserSync','ngrok']);
+  grunt.registerTask('default', ['jshint','compass:dev','browserSync']);
 
 };
