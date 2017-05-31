@@ -6,32 +6,35 @@
     <meta name="description" content="Hello, World! - A-Frame">
     <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script>
     <script>
+
+    (function() {
+      console.log("ready to go");
+    })
+
       AFRAME.registerComponent('scale-on-mouseenter', {
         schema: {
-          to: {default: '2.5 2.5 2.5'},
-          standard: {default: '1,1,1'},
-          opacityOn: {default: '1'},
-          opacityOff: {default: '0'}
+          to: {default: '2.5 2.5 2.5'}
         },
         init: function () {
           var lockTimer;
           var data = this.data;
-          var target;
-          this.el.addEventListener('mouseenter', function () {
+          var el = this.el;
+          var defaultScale = el.getAttribute('scale');
+          el.addEventListener('mouseenter', function () {
             this.setAttribute('scale', data.to);
             target = this;
             lockTimer = window.setTimeout(blinkOut, 2000);
           });
-          this.el.addEventListener('mouseleave', function () {
-            this.setAttribute('scale', data.standard);
+          el.addEventListener('mouseleave', function () {
+            this.setAttribute('scale', defaultScale);
             window.clearTimeout(lockTimer);
           });
           function blinkOut(){
-            target.setAttribute('opacity', data.opacityOff);
-            console.log(target);
+            target.parentElement.removeChild(target);
           }
         }
       });
+
     </script>
     <link rel="stylesheet" type="text/css" href="assets/stylesheets/base.css" media="screen" />
     <style type="text/css">
@@ -48,20 +51,19 @@
   <!-- Using the asset management system. -->
   <a-videosphere src="#antarctica"></a-videosphere>
 
-      <a-cylinder color="crimson" height="0.125" radius="0.5" position="1.24 2.63 -2.76" material="color:crimson;flatShading:true;roughness:0.56" geometry="primitive:cylinder;height:0.13;radius:0.5" rotation="89.95 -179.91 0"scale-on-mouseenter="to: 2.2 2.2 2.2">
+      <a-cylinder color="crimson" height="0.125" radius="0.5" position="1.24 2.63 -2.76" material="color:crimson;flatShading:true;roughness:0.56" geometry="primitive:cylinder;height:0.13;radius:0.5" rotation="89.95 -179.91 0" scale="1 1 1"scale-on-mouseenter="to: 2 2 2">
         <a-animation attribute="position" from="1.24 2.63 -2.76" to="-1.24 2.63 -2.76" delay="1000" repeat="indefinite" direction="alternate" ease="ease-in-out">
         </a-animation>
       </a-cylinder>
 
-      <a-cylinder position="2 5 5" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
 
       <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
 
       <a-entity position="0 1.87 0" light="color:#ffeb1e;type:point"></a-entity>
 
       <a-camera>
+       <div class="reticle" style="display: block;opacity: 0.6;background-color:white;width:20px;height: 20px;"></div>
         <a-cursor>
-          <div class="reticle" style="display: block;opacity: 0.6;background-color:white;width:20px;height: 20px;"></div>
         </a-cursor>
       </a-camera>
     </a-scene>
