@@ -1,5 +1,7 @@
 module.exports = function(grunt) {
-
+  
+  require('load-grunt-tasks')(grunt);
+  
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     jshint: {
@@ -19,32 +21,18 @@ module.exports = function(grunt) {
         }
       }
     },
-    compass: {                  
-      dist: {                  
-        options: {              
-          environment: 'production',
-          outputStyle: 'compressed'
-        }
-      },
-      dev: {
+   sass: {
         options: {
-          environment: 'development',
-          outputStyle: 'expanded'
+            sourceMap: true
+        },
+        dist: {
+            files: {
+                'src/assets/stylesheets/base.css': 'src/assets/sass/base.scss'
+            }
         }
-      }
-    },
-    ngrok: {
-      options: {
-        authToken: '6rK5A3uncenJaaxEKLbXk_4rHWPm7HyuryDsxaMtgaj'
-      }
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-browser-sync');
-  grunt.loadNpmTasks('grunt-contrib-compass');
-  grunt.loadNpmTasks('grunt-ngrok');
-  grunt.registerTask('default', ['jshint','compass:dev','browserSync']);
+  grunt.registerTask('default', ['jshint','sass:dist','browserSync']);
 
 };
