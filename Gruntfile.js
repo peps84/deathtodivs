@@ -11,16 +11,22 @@ module.exports = function(grunt) {
       files: ['<%= jshint.files %>'],
       tasks: ['jshint']
     },
+
     browserSync: {
       bsFiles: {
-          src : ['src/css/*.css', 'src/index.html']
+           src : [
+              'src/css/*.css',
+              'src/*.html'
+          ]
       },
       options: {
-        server: {
-            baseDir: "src"
-        }
+          server: {
+              baseDir: "./src"
+          },
+          https: true,
       }
     },
+
    sass: {
         options: {
             sourceMap: true
