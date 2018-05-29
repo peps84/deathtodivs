@@ -5,6 +5,9 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     jshint: {
+      options: {
+        ignores: ['src/assets/js/aframe.min.js']
+      },
       files: ['Gruntfile.js', 'src/assets/js/*.js'],
     },
     watch: {
